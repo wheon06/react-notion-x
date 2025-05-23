@@ -1,12 +1,7 @@
 import type * as types from 'notion-types'
-import {
-  getBlockCollectionId,
-  getBlockParentPage,
-  getTextContent
-} from 'notion-utils'
+import { getBlockCollectionId, getBlockParentPage } from 'notion-utils'
 import * as React from 'react'
 
-import { PageIcon } from '../components/page-icon'
 import {
   type NotionContext,
   NotionContextProvider,
@@ -179,9 +174,6 @@ function CollectionViewBlock({
     return null
   }
 
-  const title = getTextContent(collection.name).trim()
-  const showTitle =
-    collectionView.format?.hide_linked_collection_name !== true && title
   if (collection.icon) {
     block.format = {
       ...block.format,
@@ -201,18 +193,6 @@ function CollectionViewBlock({
             />
           )}
         </div>
-        {showTitle && (
-          <div className='notion-collection-header'>
-            <div className='notion-collection-header-title'>
-              <PageIcon
-                block={block}
-                className='notion-page-title-icon'
-                hideDefaultIcon
-              />
-              {title}
-            </div>
-          </div>
-        )}
       </div>
       <div className={cs('notion-collection', className)}>
         <CollectionView
